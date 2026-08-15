@@ -1,19 +1,21 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Birthday whishes 🎂</title>
+
+  <title>Birthday Wishes 🎂</title>
 
   <style>
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-
-    .birthday-video {
+ .birthday-video {
       position: fixed;
       width: 100%;
       height: 100%;
@@ -21,15 +23,23 @@
       border-radius: 12px;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     }
+
+    /* ==========================================
+       BODY
+    ========================================== */
+
     body {
       min-height: 100vh;
+
       display: flex;
       justify-content: center;
       align-items: center;
 
-      background: linear-gradient(135deg,
-          #fce4ec,
-          #ffe0b2);
+      background: linear-gradient(
+        135deg,
+        #fce4ec,
+        #ffe0b2
+      );
 
       font-family:
         'Segoe UI',
@@ -37,16 +47,86 @@
         Geneva,
         Verdana,
         sans-serif;
+
+      overflow: hidden;
     }
+
+
+    /* ==========================================
+       BACKGROUND VIDEO
+    ========================================== */
+
+    .birthday-video {
+      position: fixed;
+
+      top: 0;
+      left: 0;
+
+      width: 100vw;
+      height: 100vh;
+
+      object-fit: cover;
+
+      z-index: -2;
+
+      pointer-events: none;
+    }
+
+
+    /* Dark transparent layer over video */
+
+    body::before {
+      content: "";
+
+      position: fixed;
+
+      inset: 0;
+
+      background: rgba(0, 0, 0, 0.15);
+
+      z-index: -1;
+
+      pointer-events: none;
+    }
+
+
+    /* ==========================================
+       BOOK CONTAINER
+    ========================================== */
+
+    .container {
+      position: relative;
+
+      width: 340px;
+
+      height: 590px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      justify-content: flex-start;
+
+      z-index: 10;
+    }
+
+
+    /* ==========================================
+       BOOK
+    ========================================== */
 
     .book {
       position: relative;
 
       width: 340px;
-      height: 520px;
+
+      height: 420px;
 
       perspective: 1200px;
     }
+
 
     /* ==========================================
        CARD
@@ -58,19 +138,21 @@
       width: 100%;
       height: 420px;
 
-      /* Background image */
       background-size: cover;
+
       background-position: center;
+
       background-repeat: no-repeat;
 
       border-radius: 12px;
 
       box-shadow:
-        0 8px 20px rgba(0, 0, 0, 0.15);
+        0 8px 20px rgba(0, 0, 0, 0.25);
 
       display: flex;
 
       align-items: center;
+
       justify-content: center;
 
       padding: 20px;
@@ -88,7 +170,11 @@
       overflow: hidden;
     }
 
-    /* Light image overlay */
+
+    /* ==========================================
+       IMAGE OVERLAY
+    ========================================== */
+
     .page::before {
       content: "";
 
@@ -97,7 +183,7 @@
       inset: 0;
 
       background:
-        rgba(255, 255, 255, 0.20);
+        rgba(255, 255, 255, 0.12);
 
       border-radius: 12px;
 
@@ -106,85 +192,17 @@
       pointer-events: none;
     }
 
-    /* Keep hint and number above image */
-    .page>* {
-      position: relative;
-      z-index: 1;
-    }
 
     /* ==========================================
-       FLIP
+       FLIPPED CARD
     ========================================== */
 
     .page.flipped {
       transform: rotateY(-180deg);
+
       z-index: 1;
     }
 
-    /* ==========================================
-       WISH TEXT
-       NOW BELOW THE CARD
-    ========================================== */
-
-    .wish-text {
-      position: absolute;
-
-      top: 440px;
-
-      left: 0;
-
-      width: 100%;
-
-      font-size: 1.2rem;
-
-      color: #333;
-
-      text-align: center;
-
-      line-height: 1.6;
-
-      padding: 10px 15px;
-
-      background: transparent;
-
-      border-radius: 12px;
-
-      font-weight: 600;
-
-      opacity: 0;
-
-      animation: fadeIn 0.5s forwards;
-
-      pointer-events: none;
-    }
-
-    @keyframes fadeIn {
-      to {
-        opacity: 1;
-      }
-    }
-
-    /* ==========================================
-       PAGE NUMBER
-    ========================================== */
-
-    .page-number {
-      position: absolute;
-
-      bottom: 15px;
-      right: 20px;
-
-      font-size: 0.8rem;
-
-      color: white;
-
-      background:
-        rgba(0, 0, 0, 0.35);
-
-      padding: 4px 8px;
-
-      border-radius: 10px;
-    }
 
     /* ==========================================
        HINT
@@ -201,54 +219,154 @@
       font-size: 0.7rem;
 
       background:
-        rgba(0, 0, 0, 0.3);
+        rgba(0, 0, 0, 0.35);
 
       padding: 4px 8px;
 
       border-radius: 10px;
+
+      z-index: 2;
     }
+
+
+    /* ==========================================
+       PAGE NUMBER
+    ========================================== */
+
+    .page-number {
+      position: absolute;
+
+      bottom: 15px;
+      right: 20px;
+
+      font-size: 0.8rem;
+
+      color: white;
+
+      background:
+        rgba(0, 0, 0, 0.4);
+
+      padding: 4px 8px;
+
+      border-radius: 10px;
+
+      z-index: 2;
+    }
+
+
+    /* ==========================================
+       WISH OUTSIDE CARD
+    ========================================== */
+
+    .wish-display {
+
+      width: 340px;
+
+      min-height: 90px;
+
+      margin-top: 18px;
+
+      padding: 12px 18px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      text-align: center;
+
+      color: white;
+
+      font-size: 1.15rem;
+
+      font-weight: 600;
+
+      line-height: 1.5;
+
+      background:
+        rgba(0, 0, 0, 0.45);
+
+      backdrop-filter: blur(5px);
+
+      border-radius: 15px;
+
+      box-shadow:
+        0 6px 18px rgba(0, 0, 0, 0.2);
+
+      transition:
+        opacity 0.3s ease;
+
+      z-index: 20;
+    }
+
 
     /* ==========================================
        CONTROLS
     ========================================== */
 
     .controls {
-      position: absolute;
 
-      bottom: 0;
-
-      left: 50%;
-
-      transform: translateX(-50%);
+      margin-top: 15px;
 
       display: flex;
 
-      gap: 20px;
+      gap: 15px;
 
-      z-index: 1000;
+      z-index: 30;
     }
 
+
     .controls button {
-      background: #ff6b6b;
+
+      background:
+        linear-gradient(
+          135deg,
+          #ff6b6b,
+          #ff4081
+        );
 
       color: white;
 
       border: none;
 
-      padding: 10px 24px;
+      padding: 10px 22px;
 
       border-radius: 30px;
 
       cursor: pointer;
 
-      font-size: 1rem;
+      font-size: 0.95rem;
+
+      font-weight: 600;
+
+      box-shadow:
+        0 5px 15px rgba(0, 0, 0, 0.2);
 
       transition: 0.2s;
     }
 
+
     .controls button:hover {
-      background: #e55a5a;
+
+      transform:
+        translateY(-2px);
+
+      background:
+        linear-gradient(
+          135deg,
+          #e55a5a,
+          #e91e63
+        );
     }
+
+
+    .controls button:active {
+
+      transform:
+        scale(0.95);
+    }
+
 
     /* ==========================================
        MOBILE
@@ -256,75 +374,161 @@
 
     @media (max-width: 500px) {
 
-      .book {
-        width: 50vw;
-        height: 180px;
+      .container {
+
+        width: 90vw;
+
+        height: 560px;
       }
+
+
+      .book {
+
+        width: 90vw;
+
+        height: 350px;
+      }
+
 
       .page {
-        height: 300px;
+
+        width: 90vw;
+
+        height: 350px;
       }
 
-      .wish-text {
-        top: 220px;
+
+      .wish-display {
+
+        width: 90vw;
+
+        min-height: 80px;
 
         font-size: 1rem;
 
-        padding:
-          8px 10px;
+        margin-top: 15px;
+
+        padding: 10px 12px;
       }
+
 
       .controls {
+
         gap: 10px;
+
+        margin-top: 12px;
       }
 
+
       .controls button {
+
         padding:
-          9px 17px;
+          9px 15px;
 
         font-size:
           0.85rem;
       }
+
     }
 
-
   </style>
+
 </head>
+
 
 <body>
 
-  <!-- 🎥 VIDEO -->
+
+  <!-- ==========================================
+       BACKGROUND VIDEO
+  ========================================== -->
+
+    <!-- 🎥 VIDEO -->
   <video class="birthday-video" autoplay muted loop playsinline controls>
 
-    <source src="vdo.mp4" type="video/mp4">
+    <source src="Timeline 1.mov" type="video/mp4">
 
     Your browser does not support the video tag.
 
   </video>
 
-  <div class="book" id="book">
-    <!-- Pages generated by JS -->
-  </div>
+
+  <!-- ==========================================
+       AUDIO
+  ========================================== -->
+
+  <audio
+    id="birthdayAudio"
+    loop>
+
+    <source
+      src="song.mp3"
+      type="audio/mpeg">
+
+    Your browser does not support the audio element.
+
+  </audio>
 
 
-  <div class="controls">
+  <!-- ==========================================
+       MAIN CONTAINER
+  ========================================== -->
 
-    <button onclick="prevPage()">
-      ⬅ Previous
-    </button>
+  <div class="container">
 
-    <button onclick="nextPage()">
-      Next ➡
-    </button>
+
+    <!-- ========================================
+         FLIPBOOK
+    ========================================= -->
+
+    <div
+      class="book"
+      id="book">
+
+      <!-- Pages generated by JavaScript -->
+
+    </div>
+
+
+    <!-- ========================================
+         SINGLE WISH DISPLAY
+         This is OUTSIDE the cards.
+    ========================================= -->
+
+    <div
+      class="wish-display"
+      id="wishDisplay">
+
+      Happy Birthday! May your day be as sweet as you!
+
+    </div>
+
+
+    <!-- ========================================
+         CONTROLS
+    ========================================= -->
+
+    <div class="controls">
+
+      <button onclick="prevPage()">
+        ⬅ Previous
+      </button>
+
+      <button onclick="nextPage()">
+        Next ➡
+      </button>
+
+    </div>
 
   </div>
 
 
   <script>
 
-    // ==========================================
-    // YOUR IMAGES AND WISHES
-    // ==========================================
+
+    /* ==========================================
+       WISHES AND IMAGES
+    ========================================== */
 
     const wishes = [
 
@@ -336,6 +540,7 @@
           'image copy 3.png'
       },
 
+
       {
         text:
           'Wishing you endless joy and laughter!',
@@ -343,6 +548,7 @@
         image:
           'image.png'
       },
+
 
       {
         text:
@@ -352,6 +558,7 @@
           'image copy 4.png'
       },
 
+
       {
         text:
           'Another year, another adventure – enjoy every moment!',
@@ -360,6 +567,7 @@
           'image copy 2.png'
       },
 
+
       {
         text:
           'You deserve all the love and happiness today!',
@@ -367,6 +575,7 @@
         image:
           'image copy 5.png'
       },
+
 
       {
         text:
@@ -379,15 +588,26 @@
     ];
 
 
-    // ==========================================
-    // BUILD PAGES
-    // ==========================================
+    /* ==========================================
+       GET ELEMENTS
+    ========================================== */
 
     const book =
       document.getElementById('book');
 
+    const wishDisplay =
+      document.getElementById('wishDisplay');
+
+    const birthdayAudio =
+      document.getElementById('birthdayAudio');
+
+
+    /* ==========================================
+       BUILD CARDS
+    ========================================== */
 
     wishes.forEach((w, i) => {
+
 
       const page =
         document.createElement('div');
@@ -395,29 +615,27 @@
 
       page.className =
         'page' +
-        (i === 0 ? '' : ' flipped');
+        (i === 0
+          ? ''
+          : ' flipped');
 
 
       page.dataset.index = i;
 
 
-      // Set card background image
+      /* Background image */
 
       page.style.backgroundImage =
         `url("${w.image}")`;
 
+
+      /* Card content */
 
       page.innerHTML = `
 
         <div class="hint">
           Click to flip
         </div>
-
-
-        <div class="wish-text">
-          ${w.text}
-        </div>
-
 
         <div class="page-number">
           ${i + 1} / ${wishes.length}
@@ -426,19 +644,31 @@
       `;
 
 
-      // ==========================================
-      // CLICK CARD TO FLIP
-      // ==========================================
+      /* ========================================
+         CARD CLICK
+      ======================================== */
 
       page.addEventListener(
         'click',
-        (e) => {
+        function(e) {
+
 
           e.stopPropagation();
+
 
           page.classList.toggle(
             'flipped'
           );
+
+
+          /*
+            Start music after user
+            interacts with the page.
+          */
+
+          birthdayAudio.play()
+            .catch(() => {});
+
 
         }
       );
@@ -449,9 +679,9 @@
     });
 
 
-    // ==========================================
-    // NAVIGATION
-    // ==========================================
+    /* ==========================================
+       PAGE NAVIGATION
+    ========================================== */
 
     let currentPage = 0;
 
@@ -460,7 +690,38 @@
       document.querySelectorAll('.page');
 
 
+    /* ==========================================
+       UPDATE WISH
+    ========================================== */
+
+    function updateWish() {
+
+
+      wishDisplay.style.opacity = '0';
+
+
+      setTimeout(() => {
+
+
+        wishDisplay.textContent =
+          wishes[currentPage].text;
+
+
+        wishDisplay.style.opacity =
+          '1';
+
+
+      }, 150);
+
+    }
+
+
+    /* ==========================================
+       GO TO PAGE
+    ========================================== */
+
     function goToPage(index) {
+
 
       if (
         index < 0 ||
@@ -474,6 +735,7 @@
 
       pages.forEach(
         (page, i) => {
+
 
           if (i <= index) {
 
@@ -495,53 +757,106 @@
 
       currentPage = index;
 
+
+      /* Update text below card */
+
+      updateWish();
+
     }
 
 
-    // ==========================================
-    // NEXT
-    // ==========================================
+    /* ==========================================
+       NEXT PAGE
+    ========================================== */
 
     function nextPage() {
 
-      goToPage(
 
-        Math.min(
-          currentPage + 1,
-          pages.length - 1
-        )
+      if (
+        currentPage <
+        pages.length - 1
+      ) {
 
-      );
+
+        goToPage(
+          currentPage + 1
+        );
+
+
+        birthdayAudio.play()
+          .catch(() => {});
+
+      }
 
     }
 
 
-    // ==========================================
-    // PREVIOUS
-    // ==========================================
+    /* ==========================================
+       PREVIOUS PAGE
+    ========================================== */
 
     function prevPage() {
 
-      goToPage(
 
-        Math.max(
-          currentPage - 1,
-          0
-        )
+      if (
+        currentPage > 0
+      ) {
 
-      );
+
+        goToPage(
+          currentPage - 1
+        );
+
+
+        birthdayAudio.play()
+          .catch(() => {});
+
+      }
 
     }
 
 
-    // ==========================================
-    // START
-    // ==========================================
+    /* ==========================================
+       KEYBOARD SUPPORT
+    ========================================== */
+
+    document.addEventListener(
+      'keydown',
+      function(event) {
+
+
+        if (
+          event.key === 'ArrowRight'
+        ) {
+
+          nextPage();
+
+        }
+
+
+        if (
+          event.key === 'ArrowLeft'
+        ) {
+
+          prevPage();
+
+        }
+
+      }
+    );
+
+
+    /* ==========================================
+       START
+    ========================================== */
 
     goToPage(0);
 
+
   </script>
+
 
 </body>
 
 </html>
+
