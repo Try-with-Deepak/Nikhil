@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,19 +9,16 @@
 
   <style>
 
+    /* ==========================================
+       RESET
+    ========================================== */
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
- .birthday-video {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    }
+
 
     /* ==========================================
        BODY
@@ -35,12 +31,6 @@
       justify-content: center;
       align-items: center;
 
-      background: linear-gradient(
-        135deg,
-        #fce4ec,
-        #ffe0b2
-      );
-
       font-family:
         'Segoe UI',
         Tahoma,
@@ -49,6 +39,8 @@
         sans-serif;
 
       overflow: hidden;
+
+      position: relative;
     }
 
 
@@ -67,13 +59,15 @@
 
       object-fit: cover;
 
-      z-index: -2;
+      z-index: 0;
 
-      pointer-events: none;
+      background: #000;
     }
 
 
-    /* Dark transparent layer over video */
+    /* ==========================================
+       DARK OVERLAY
+    ========================================== */
 
     body::before {
       content: "";
@@ -82,16 +76,17 @@
 
       inset: 0;
 
-      background: rgba(0, 0, 0, 0.15);
+      background:
+        rgba(0, 0, 0, 0.20);
 
-      z-index: -1;
+      z-index: 1;
 
       pointer-events: none;
     }
 
 
     /* ==========================================
-       BOOK CONTAINER
+       MAIN CONTAINER
     ========================================== */
 
     .container {
@@ -109,7 +104,7 @@
 
       justify-content: flex-start;
 
-      z-index: 10;
+      z-index: 2;
     }
 
 
@@ -129,13 +124,14 @@
 
 
     /* ==========================================
-       CARD
+       CARD / PAGE
     ========================================== */
 
     .page {
       position: absolute;
 
       width: 100%;
+
       height: 420px;
 
       background-size: cover;
@@ -147,7 +143,8 @@
       border-radius: 12px;
 
       box-shadow:
-        0 8px 20px rgba(0, 0, 0, 0.25);
+        0 8px 25px
+        rgba(0, 0, 0, 0.35);
 
       display: flex;
 
@@ -198,14 +195,15 @@
     ========================================== */
 
     .page.flipped {
-      transform: rotateY(-180deg);
+      transform:
+        rotateY(-180deg);
 
       z-index: 1;
     }
 
 
     /* ==========================================
-       HINT
+       CLICK HINT
     ========================================== */
 
     .hint {
@@ -219,9 +217,9 @@
       font-size: 0.7rem;
 
       background:
-        rgba(0, 0, 0, 0.35);
+        rgba(0, 0, 0, 0.40);
 
-      padding: 4px 8px;
+      padding: 5px 9px;
 
       border-radius: 10px;
 
@@ -244,7 +242,7 @@
       color: white;
 
       background:
-        rgba(0, 0, 0, 0.4);
+        rgba(0, 0, 0, 0.45);
 
       padding: 4px 8px;
 
@@ -255,11 +253,10 @@
 
 
     /* ==========================================
-       WISH OUTSIDE CARD
+       WISH BELOW CARD
     ========================================== */
 
     .wish-display {
-
       width: 340px;
 
       min-height: 90px;
@@ -285,40 +282,40 @@
       line-height: 1.5;
 
       background:
-        rgba(0, 0, 0, 0.45);
+        rgba(0, 0, 0, 0.50);
 
-      backdrop-filter: blur(5px);
+      backdrop-filter:
+        blur(6px);
 
       border-radius: 15px;
 
       box-shadow:
-        0 6px 18px rgba(0, 0, 0, 0.2);
+        0 6px 18px
+        rgba(0, 0, 0, 0.25);
 
       transition:
         opacity 0.3s ease;
 
-      z-index: 20;
+      z-index: 10;
     }
 
 
     /* ==========================================
-       CONTROLS
+       BUTTON CONTROLS
     ========================================== */
 
     .controls {
-
       margin-top: 15px;
 
       display: flex;
 
       gap: 15px;
 
-      z-index: 30;
+      z-index: 20;
     }
 
 
     .controls button {
-
       background:
         linear-gradient(
           135deg,
@@ -341,14 +338,15 @@
       font-weight: 600;
 
       box-shadow:
-        0 5px 15px rgba(0, 0, 0, 0.2);
+        0 5px 15px
+        rgba(0, 0, 0, 0.25);
 
-      transition: 0.2s;
+      transition:
+        0.2s;
     }
 
 
     .controls button:hover {
-
       transform:
         translateY(-2px);
 
@@ -362,7 +360,6 @@
 
 
     .controls button:active {
-
       transform:
         scale(0.95);
     }
@@ -375,7 +372,6 @@
     @media (max-width: 500px) {
 
       .container {
-
         width: 90vw;
 
         height: 560px;
@@ -383,7 +379,6 @@
 
 
       .book {
-
         width: 90vw;
 
         height: 350px;
@@ -391,15 +386,13 @@
 
 
       .page {
-
         width: 90vw;
 
-        height: 350px;
+        height: 300px;
       }
 
 
       .wish-display {
-
         width: 90vw;
 
         min-height: 80px;
@@ -413,7 +406,6 @@
 
 
       .controls {
-
         gap: 10px;
 
         margin-top: 12px;
@@ -421,7 +413,6 @@
 
 
       .controls button {
-
         padding:
           9px 15px;
 
@@ -443,10 +434,17 @@
        BACKGROUND VIDEO
   ========================================== -->
 
-    <!-- 🎥 VIDEO -->
-  <video class="birthday-video" autoplay muted loop playsinline controls>
+  <video
+    class="birthday-video"
+    autoplay
+    muted
+    loop
+    playsinline
+    controls>
 
-    <source src="Timeline 1.mov" type="video/mp4">
+    <source
+      src="Timeline 1.mp4"
+      type="video/mp4">
 
     Your browser does not support the video tag.
 
@@ -454,7 +452,7 @@
 
 
   <!-- ==========================================
-       AUDIO
+       BACKGROUND MUSIC
   ========================================== -->
 
   <audio
@@ -485,37 +483,43 @@
       class="book"
       id="book">
 
-      <!-- Pages generated by JavaScript -->
-
     </div>
 
 
     <!-- ========================================
-         SINGLE WISH DISPLAY
-         This is OUTSIDE the cards.
+         WISH DISPLAY
+         OUTSIDE THE CARD
     ========================================= -->
 
     <div
       class="wish-display"
       id="wishDisplay">
 
-      Happy Birthday! May your day be as sweet as you!
+      Happy Birthday!
+      May your day be as sweet as you!
 
     </div>
 
 
     <!-- ========================================
-         CONTROLS
+         NAVIGATION BUTTONS
     ========================================= -->
 
     <div class="controls">
 
-      <button onclick="prevPage()">
+      <button
+        onclick="prevPage()">
+
         ⬅ Previous
+
       </button>
 
-      <button onclick="nextPage()">
+
+      <button
+        onclick="nextPage()">
+
         Next ➡
+
       </button>
 
     </div>
@@ -527,191 +531,201 @@
 
 
     /* ==========================================
-       WISHES AND IMAGES
+       WISHES + IMAGES
     ========================================== */
 
     const wishes = [
 
       {
         text:
-          'Happy Birthday! May your day be as sweet as you!',
+          "Happy Birthday! May your day be as sweet as you!",
 
         image:
-          'image copy 3.png'
+          "image copy 3.png"
       },
 
 
       {
         text:
-          'Wishing you endless joy and laughter!',
+          "Wishing you endless joy and laughter!",
 
         image:
-          'image.png'
+          "image.png"
       },
 
 
       {
         text:
-          'May all your dreams come true this year!',
+          "May all your dreams come true this year!",
 
         image:
-          'image copy 4.png'
+          "image copy 4.png"
       },
 
 
       {
         text:
-          'Another year, another adventure – enjoy every moment!',
+          "Another year, another adventure – enjoy every moment!",
 
         image:
-          'image copy 2.png'
+          "image copy 2.png"
       },
 
 
       {
         text:
-          'You deserve all the love and happiness today!',
+          "You deserve all the love and happiness today!",
 
         image:
-          'image copy 5.png'
+          "image copy 5.png"
       },
 
 
       {
         text:
-          'Stay cute, stay blessed – Happy Birthday!',
+          "Stay cute, stay blessed – Happy Birthday!",
 
         image:
-          'image copy 6.png'
+          "image copy 6.png"
       }
 
     ];
 
 
     /* ==========================================
-       GET ELEMENTS
+       GET HTML ELEMENTS
     ========================================== */
 
     const book =
-      document.getElementById('book');
+      document.getElementById("book");
+
 
     const wishDisplay =
-      document.getElementById('wishDisplay');
+      document.getElementById("wishDisplay");
+
 
     const birthdayAudio =
-      document.getElementById('birthdayAudio');
+      document.getElementById("birthdayAudio");
 
 
     /* ==========================================
-       BUILD CARDS
+       CREATE ALL CARDS
     ========================================== */
 
-    wishes.forEach((w, i) => {
+    wishes.forEach(
+      (w, i) => {
+
+        const page =
+          document.createElement("div");
 
 
-      const page =
-        document.createElement('div');
+        /* First card visible,
+           remaining cards flipped */
+
+        page.className =
+          "page" +
+          (i === 0
+            ? ""
+            : " flipped");
 
 
-      page.className =
-        'page' +
-        (i === 0
-          ? ''
-          : ' flipped');
+        page.dataset.index =
+          i;
 
 
-      page.dataset.index = i;
+        /* Set background image */
+
+        page.style.backgroundImage =
+          `url("${w.image}")`;
 
 
-      /* Background image */
+        /* Card content */
 
-      page.style.backgroundImage =
-        `url("${w.image}")`;
+        page.innerHTML = `
 
+          <div class="hint">
+            Click to flip
+          </div>
 
-      /* Card content */
+          <div class="page-number">
+            ${i + 1} / ${wishes.length}
+          </div>
 
-      page.innerHTML = `
-
-        <div class="hint">
-          Click to flip
-        </div>
-
-        <div class="page-number">
-          ${i + 1} / ${wishes.length}
-        </div>
-
-      `;
+        `;
 
 
-      /* ========================================
-         CARD CLICK
-      ======================================== */
+        /* ======================================
+           CARD CLICK
+        ====================================== */
 
-      page.addEventListener(
-        'click',
-        function(e) {
+        page.addEventListener(
+          "click",
+          function(event) {
 
-
-          e.stopPropagation();
-
-
-          page.classList.toggle(
-            'flipped'
-          );
+            event.stopPropagation();
 
 
-          /*
-            Start music after user
-            interacts with the page.
-          */
+            /* Flip card */
 
-          birthdayAudio.play()
-            .catch(() => {});
+            page.classList.toggle(
+              "flipped"
+            );
 
 
-        }
-      );
+            /* Start music */
+
+            birthdayAudio
+              .play()
+              .catch(() => {});
+
+          }
+        );
 
 
-      book.appendChild(page);
+        book.appendChild(page);
 
-    });
+      }
+    );
 
 
     /* ==========================================
-       PAGE NAVIGATION
+       CURRENT PAGE
     ========================================== */
 
     let currentPage = 0;
 
 
     const pages =
-      document.querySelectorAll('.page');
+      document.querySelectorAll(".page");
 
 
     /* ==========================================
-       UPDATE WISH
+       UPDATE WISH TEXT
     ========================================== */
 
     function updateWish() {
 
+      /* Fade out */
 
-      wishDisplay.style.opacity = '0';
-
-
-      setTimeout(() => {
-
-
-        wishDisplay.textContent =
-          wishes[currentPage].text;
+      wishDisplay.style.opacity =
+        "0";
 
 
-        wishDisplay.style.opacity =
-          '1';
+      setTimeout(
+        () => {
+
+          wishDisplay.textContent =
+            wishes[currentPage].text;
 
 
-      }, 150);
+          /* Fade in */
+
+          wishDisplay.style.opacity =
+            "1";
+
+        },
+        150
+      );
 
     }
 
@@ -721,7 +735,6 @@
     ========================================== */
 
     function goToPage(index) {
-
 
       if (
         index < 0 ||
@@ -733,20 +746,21 @@
       }
 
 
+      /* Flip cards */
+
       pages.forEach(
         (page, i) => {
-
 
           if (i <= index) {
 
             page.classList.remove(
-              'flipped'
+              "flipped"
             );
 
           } else {
 
             page.classList.add(
-              'flipped'
+              "flipped"
             );
 
           }
@@ -755,10 +769,13 @@
       );
 
 
-      currentPage = index;
+      /* Save current page */
+
+      currentPage =
+        index;
 
 
-      /* Update text below card */
+      /* Update wish */
 
       updateWish();
 
@@ -766,24 +783,25 @@
 
 
     /* ==========================================
-       NEXT PAGE
+       NEXT BUTTON
     ========================================== */
 
     function nextPage() {
-
 
       if (
         currentPage <
         pages.length - 1
       ) {
 
-
         goToPage(
           currentPage + 1
         );
 
 
-        birthdayAudio.play()
+        /* Start music */
+
+        birthdayAudio
+          .play()
           .catch(() => {});
 
       }
@@ -792,23 +810,24 @@
 
 
     /* ==========================================
-       PREVIOUS PAGE
+       PREVIOUS BUTTON
     ========================================== */
 
     function prevPage() {
 
-
       if (
         currentPage > 0
       ) {
-
 
         goToPage(
           currentPage - 1
         );
 
 
-        birthdayAudio.play()
+        /* Start music */
+
+        birthdayAudio
+          .play()
           .catch(() => {});
 
       }
@@ -817,16 +836,15 @@
 
 
     /* ==========================================
-       KEYBOARD SUPPORT
+       KEYBOARD ARROWS
     ========================================== */
 
     document.addEventListener(
-      'keydown',
+      "keydown",
       function(event) {
 
-
         if (
-          event.key === 'ArrowRight'
+          event.key === "ArrowRight"
         ) {
 
           nextPage();
@@ -835,7 +853,7 @@
 
 
         if (
-          event.key === 'ArrowLeft'
+          event.key === "ArrowLeft"
         ) {
 
           prevPage();
@@ -847,7 +865,7 @@
 
 
     /* ==========================================
-       START
+       START FIRST PAGE
     ========================================== */
 
     goToPage(0);
@@ -859,4 +877,3 @@
 </body>
 
 </html>
-
